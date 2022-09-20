@@ -18,8 +18,8 @@
 - Oracle Database - Database Management System
 
 ## Other Technologies
--[Slack](https://slack.com/) - Communication
--[Zoom](https://zoom.us/) - Video Calls
+- [Slack](https://slack.com/) - Communication
+- [Zoom](https://zoom.us/) - Video Calls
 
 ## Data Sources
 - [Deaths by Sex and Age](https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku)
