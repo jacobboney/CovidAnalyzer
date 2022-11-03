@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 Bootswatch Config
  */
 import "bootswatch/dist/journal/bootstrap.min.css";
-import './App.css';
+
 /*
 React Bootstrap config
  */
