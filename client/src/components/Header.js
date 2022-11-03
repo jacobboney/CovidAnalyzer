@@ -7,7 +7,7 @@ import {
 function Header(){
     return(
         <Navbar bg="primary" variant="dark" expand="lg">
-                <div className="container">
+                <div className='headerCont'>
                     <Navbar.Brand><NavLink className="headerLink" to="/">Covid Analyzer</NavLink></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

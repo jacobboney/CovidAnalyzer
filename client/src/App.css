@@ -1,4 +1,10 @@
 .headerLink{
   color: white;
   text-decoration: none;
+  margin-right: 10px;
+}
+
+.headerCont{
+  display: flex;
+  margin-left: 10px; 
 }
