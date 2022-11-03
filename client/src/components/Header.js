@@ -1,19 +1,23 @@
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {
+    NavLink
+} from "react-router-dom"
 
 function Header(){
     return(
         <Navbar bg="primary" variant="dark" expand="lg">
                 <div className="container">
-                    <Navbar.Brand href="#home">Covid Analyzer</Navbar.Brand>
+                    <Navbar.Brand><NavLink className="headerLink" to="/">Covid Analyzer</NavLink></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#home">HOME</Nav.Link>
-                            <Nav.Link href="#query1">CASES</Nav.Link>
-                            <Nav.Link href="#query2">VACCINATIONS</Nav.Link>
-                            <Nav.Link href="#query3">GLOBAL DISTRIBUTION</Nav.Link>
-                            <Nav.Link href="#query4">DATA SOURCES</Nav.Link>
+                            <NavLink className="headerLink" to="/">HOME</NavLink>
+                            <NavLink className="headerLink" to="/cases">CASES</NavLink>
+                            <NavLink className="headerLink" to="/cases">CASES</NavLink>
+                            <NavLink className="headerLink" to="/vax">VACCINATIONS</NavLink>
+                            <NavLink className="headerLink" to="/globaldist">GLOBAL DISTRIBUTION</NavLink>
+                            <NavLink className="headerLink" to="/datasources">DATA SOURCES</NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </div>
