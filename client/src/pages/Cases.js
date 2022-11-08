@@ -29,8 +29,8 @@ function Cases(){
         }
     }
     return(
-        <div>
-            <h1>Cases Page Test</h1>
+        <div className="pageContainer">
+            <h1 className="text-center my-4">Cases</h1>
             <div className="pageContent">
                 <div className="parametersContainer">
                     <p className="parameterItem" id="casesOverTime" onClick={handleClick}>% of cases over time</p>
