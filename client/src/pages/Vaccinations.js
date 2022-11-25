@@ -1,5 +1,6 @@
 import React, {useState
 } from "react";
+import Plot from 'react-plotly.js';
 
 function Vaccinations(){
     const [selectedParam, setSelectedParam] = useState("")
@@ -7,26 +8,97 @@ function Vaccinations(){
         setSelectedParam(e.target.id)
     }
 
+    const data=[
+        {
+            x: [1, 2, 3],
+            y: [2, 6, 3],
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: {color: 'red'},
+        },
+        {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+    ]
+
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return "chart Cases over Time"
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [7, 1, 5],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
 
             case "hosp":
-                return "%cases hosp"
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [7, 1, 9],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
 
             case "deathsOT":
-                return "deaths"
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [7, 8, 5],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
 
             case "causes":
-                return "causes"
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [7, 5, 5],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
             
             case "season":
-                return "season"
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [1, 1, 5],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
 
             default:
-                return
-        }
+                return ([
+                    {
+                        x: [1, 2, 3],
+                        y: [1, 1, 5],
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: {color: 'red'},
+                    },
+                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+                ])
+                break;
+            }
     }
 
     return(
@@ -42,7 +114,15 @@ function Vaccinations(){
                 </div>
 
                 <div className="visContainer">
-                    {showVis()}
+                {selectedParam && (
+                        <div className="d-flex justify-content-center w-100">
+                        <Plot
+                            data={showVis()}
+                            layout={ {width: "90%", maxWidth: 1000, height: 400, title: 'A Fancy Plot'} }
+                        />
+                    </div>
+
+                    )}
                 </div>
             </div>
         </div>
