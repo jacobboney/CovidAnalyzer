@@ -1,27 +1,45 @@
 import './App.css';
-import React from "react";
-import Plot from 'react-plotly.js';
+import React, { useEffect, useState} from "react";
+import Barr from "./components/testBar";
+
+
 
 
 
 function App() {
+
+    const[backendData, setBackendData] = useState([{}]);
+
+    useEffect(() => {
+        fetch("/test").then(
+            response => response.json()
+        ).then(
+            data => {
+                setBackendData(data)
+            }
+        )
+    }, [])
+
+    let cData = {
+        x: [],
+        y: []
+    }
+    backendData.forEach(function(val){
+        cData.x.push(val["NAME"]);
+        cData.x.push(val["AREA"]);
+    })
+
+
     return (
+
         <div className = "App">
            <h1>This will be the home/landing page</h1>
+
             <div className="d-flex justify-content-center">
-                <Plot
-                    data={[
-                        {
-                            x: [1, 2, 3],
-                            y: [2, 6, 3],
-                            type: 'scatter',
-                            mode: 'lines+markers',
-                            marker: {color: 'red'},
-                        },
-                        {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                    ]}
-                    layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
-                />
+
+                <Barr/>
+
+
             </div>
         </div>
     );
