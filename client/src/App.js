@@ -1,34 +1,12 @@
 import './App.css';
 import React, { useEffect, useState} from "react";
-import Barr from "./components/testBar";
+import Barr from "./components/charts/testBar";
 
 
 
 
 
 function App() {
-
-    const[backendData, setBackendData] = useState([{}]);
-
-    useEffect(() => {
-        fetch("/test").then(
-            response => response.json()
-        ).then(
-            data => {
-                setBackendData(data)
-            }
-        )
-    }, [])
-
-    let cData = {
-        x: [],
-        y: []
-    }
-    backendData.forEach(function(val){
-        cData.x.push(val["NAME"]);
-        cData.x.push(val["AREA"]);
-    })
-
 
     return (
 
