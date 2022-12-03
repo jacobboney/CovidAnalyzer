@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 
-import Plot from "react-plotly.js";
+import Plot from "../../../node_modules/react-plotly.js/react-plotly";
 
 
 class Barr extends Component {
+
 
     constructor(props) {
         super(props);

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Plot from "react-plotly.js";
+import Plot from "../../../node_modules/react-plotly.js/react-plotly";
 
 class Graph extends React.Component {
 
