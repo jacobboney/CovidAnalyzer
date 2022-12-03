@@ -1,105 +1,47 @@
 import React, {useState
 } from "react";
-import Plot from 'react-plotly.js';
+import GlobalCOT from "../components/charts/global distributions/globalCOT";
+import GlobalCLH from "../components/charts/global distributions/globalCLH";
+import GlobalRDTC from "../components/charts/global distributions/globalRDTC";
+import GlobalCOD from "../components/charts/global distributions/globalCOD";
+import GlobalBOS from "../components/charts/global distributions/globalBOS";
+
 
 function GlobalDistribution(){
-
     const [selectedParam, setSelectedParam] = useState("")
+
     function handleClick(e){
         setSelectedParam(e.target.id)
     }
 
-    const data=[
-        {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+markers',
-            marker: {color: 'red'},
-        },
-        {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-    ]
-
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <GlobalCOT/>
                 break;
 
             case "hosp":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 9],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <GlobalCLH/>
                 break;
 
             case "deathsOT":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 8, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <GlobalRDTC/>
                 break;
 
             case "causes":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 5, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
-                break;
-            
-            case "season":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <GlobalCOD/>
                 break;
 
-            default:
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+            case "season":
+                return <GlobalBOS/>
                 break;
-            }
+
+            case "":
+                return <GlobalCOT/>
+            default:
+                return <GlobalCOT/>
+                break;
+        }
     }
 
     return(
@@ -117,10 +59,7 @@ function GlobalDistribution(){
                 <div className="visContainer">
                 {selectedParam && (
                         <div className="d-flex justify-content-center w-100">
-                        <Plot
-                            data={showVis()}
-                            layout={ {width: "90%", maxWidth: 1000, height: 400, title: 'A Fancy Plot'} }
-                        />
+                            {showVis()}
                     </div>
 
                     )}

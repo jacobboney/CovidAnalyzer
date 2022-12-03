@@ -1,104 +1,49 @@
 import React, {useState
 } from "react";
 import Plot from 'react-plotly.js';
+import VaccCOT from "../components/charts/vaccinations/vaccCOT";
+import VaccCLH from "../components/charts/vaccinations/vaccCLH";
+import VaccRDTC from "../components/charts/vaccinations/vaccRDTC";
+import VaccCOD from "../components/charts/vaccinations/vaccCOD";
+import VaccBOS from "../components/charts/vaccinations/vaccBOS";
+
 
 function Vaccinations(){
+
     const [selectedParam, setSelectedParam] = useState("")
+
     function handleClick(e){
         setSelectedParam(e.target.id)
     }
 
-    const data=[
-        {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+markers',
-            marker: {color: 'red'},
-        },
-        {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-    ]
-
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <VaccCOT/>
                 break;
 
             case "hosp":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 9],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <VaccCLH/>
                 break;
 
             case "deathsOT":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 8, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <VaccRDTC/>
                 break;
 
             case "causes":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 5, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
-                break;
-            
-            case "season":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <VaccCOD/>
                 break;
 
-            default:
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+            case "season":
+                return <VaccBOS/>
                 break;
-            }
+
+            case "":
+                return <VaccCOT/>
+            default:
+                return <VaccCOT/>
+                break;
+        }
     }
 
     return(
@@ -115,11 +60,8 @@ function Vaccinations(){
 
                 <div className="visContainer">
                 {selectedParam && (
-                        <div className="d-flex justify-content-center w-100">
-                        <Plot
-                            data={showVis()}
-                            layout={ {width: "90%", maxWidth: 1000, height: 400, title: 'A Fancy Plot'} }
-                        />
+                    <div className="d-flex justify-content-center w-100">
+                        {showVis()}
                     </div>
 
                     )}

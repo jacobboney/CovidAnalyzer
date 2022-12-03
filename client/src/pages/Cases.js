@@ -1,103 +1,44 @@
 import React, {useState
 } from "react";
-import Plot from 'react-plotly.js';
+import CasesCOT from "../components/charts/cases/casesCOT";
+import CasesCLH from "../components/charts/cases/casesCLH";
+import CasesRDTC from "../components/charts/cases/casesRDTC";
+import CasesCOD from "../components/charts/cases/casesCOD";
+import CasesBOS from "../components/charts/cases/casesBOS";
 
 function Cases(){
     const [selectedParam, setSelectedParam] = useState("")
-    const [data, setData]= useState([
-        {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+markers',
-            marker: {color: 'red'},
-        },
-        {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-    ])
 
     function handleClick(e){
         setSelectedParam(e.target.id)
     }
 
-
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesCOT/>
                 break;
 
             case "hosp":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 1, 9],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesCLH/>
                 break;
 
             case "deathsOT":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 8, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesRDTC/>
                 break;
 
             case "causes":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [7, 5, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesCOD/>
                 break;
             
             case "season":
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesBOS/>
                 break;
 
+            case "":
+                return <CasesCOT/>
             default:
-                return ([
-                    {
-                        x: [1, 2, 3],
-                        y: [1, 1, 5],
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        marker: {color: 'red'},
-                    },
-                    {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
-                ])
+                return <CasesCOT/>
                 break;
             }
     }
@@ -116,10 +57,7 @@ function Cases(){
                 <div className="visContainer">
                     {selectedParam && (
                         <div className="d-flex justify-content-center w-100">
-                        <Plot
-                            data={showVis()}
-                            layout={ {width: "90%", maxWidth: 1000, height: 400, title: 'A Fancy Plot'} }
-                        />
+                            {showVis()}
                     </div>
 
                     )}
