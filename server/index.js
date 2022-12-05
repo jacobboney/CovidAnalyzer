@@ -23,7 +23,7 @@ app.get("/json", (req, res) => {
 app.get("/test", async (req, res) => {
     let sql = `select * from CONTINENT`;
     let data = await query(sql);
-    console.log(data);
+    //console.log(data);
     res.json(data);
 })
 
@@ -31,16 +31,56 @@ app.get("/test", async (req, res) => {
 //Monthly Cases Over Time
 app.get("/casesMonthly", async (req, res) => {
     let sql = `select * from(
-select "Monthly_Cases", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date" from(
-select sum(cases) as "Monthly_Cases", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year" from casedata
+select "Monthly_Cases", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(cases) as "Monthly_Cases", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", casedata.iso_code as "Code" from casedata
 where iso_code = 'USA'
-group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY')
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), casedata.iso_code
 order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))
 `;
     let data = await query(sql);
     //console.log(data);
     res.json(data);
 })
+
+app.get("/casesToDeathPercent", async (req, res) => {
+    let sql = `select ("Monthly_Deaths" / "Monthly_Cases") as "Percentage", t1."Date", t1."Code" from(
+
+(select * from(
+select "Monthly_Deaths", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(deaths) as "Monthly_Deaths", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", casedata.iso_code as "Code" from casedata
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), casedata.iso_code
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))) t1
+
+inner join(select * from(
+select "Monthly_Cases", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(cases) as "Monthly_Cases", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", casedata.iso_code as "Code" from casedata
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), casedata.iso_code
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))) t2
+
+on t1."Date"=t2."Date")
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
+
+app.get("/casesVsHDI", async (req, res) => {
+    let sql = `select "Country", round(("TotalCases" / "Population"), 5) as "PerCapita", "HDI" from(
+(select casedata.iso_code as "Country", sum(casedata.cases) as "TotalCases", population.population as "Population" from casedata
+join population on casedata.iso_code=population.iso_code
+group by casedata.iso_code, population.population)
+join development_Index on "Country"=development_index.iso_code)
+where "Country"!='NAM'
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
+
+
+
 
 app.get("/vaccPerCapita", async (req, res) => {
     let sql = `select Country, round((totalvax / population), 5) as perCapita from(

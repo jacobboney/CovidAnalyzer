@@ -18,7 +18,7 @@ async function query(statement){
         console.log("Successfully connected to Oracle Database");
 
         result = await connection.execute(statement, [], {outFormat: oracledb.OUT_FORMAT_OBJECT});
-        console.log(result);
+        //console.log(result);
 
         return result.rows;
     }

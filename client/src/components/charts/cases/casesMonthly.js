@@ -9,7 +9,7 @@ class CasesMonthly extends Component {
 
     constructor(props) {
         super(props);
-        this.state={data: [], data2:[]}
+        this.state={data: []}
     }
 
     componentDidMount() {
@@ -28,17 +28,18 @@ class CasesMonthly extends Component {
 
         let x = [];
         let y = [];
+        let z = [];
         data.map(each => {
             x.push(each.Date)
             y.push(each.Monthly_Cases)
-
+            z.push(each.Code)
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
+        plot_data['z'] = z;
 
-        console.log(plot_data['x'])
-        console.log(plot_data['y'])
+
         return plot_data;
     }
 
@@ -55,7 +56,7 @@ class CasesMonthly extends Component {
                             line:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 1000, height: 600, title: "Number of Monthly Cases over Time (USA)", xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Number of Cases (Monthly)'}}}
+                    layout = {{width: 1000, height: 600, title: `Number of Monthly Cases over Time in ${this.transformData(this.state.data)['z'][0]}`, xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Number of Cases (Monthly)'}}}
                 />
             </div>
         )

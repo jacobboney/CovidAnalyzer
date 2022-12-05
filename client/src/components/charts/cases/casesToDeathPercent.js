@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Plot from "react-plotly.js";
 
 
-class CasesCLH extends Component {
+class CasesToDeathPercent extends Component {
 
 
     constructor(props) {
@@ -12,7 +12,7 @@ class CasesCLH extends Component {
     }
 
     componentDidMount() {
-        const endPoint = "/casesCLH"
+        const endPoint = "/casesToDeathPercent"
 
         fetch(endPoint).then(
             response => response.json()
@@ -27,13 +27,17 @@ class CasesCLH extends Component {
 
         let x = [];
         let y = [];
+        let z = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.Date)
+            y.push(each.Percentage)
+            z.push(each.Code)
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
+        plot_data['z'] = z;
+
 
         return plot_data;
     }
@@ -44,16 +48,18 @@ class CasesCLH extends Component {
                 <Plot
                     data ={[
                         {
-                            type: 'bar',
+                            type: 'scatter',
+                            mode: "lines+markers",
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            line:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Percentage of Cases Leading to Hospitalization"}}
+                    layout = {{width: 1000, height: 600, title: `Percentage of Cases Resulting in Death in ${this.transformData(this.state.data)['z'][0]}`, xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Percentage Cases Resulting in Death (Monthly)', tickformat: ',.0%'}}}
                 />
             </div>
         )
     }
 }
 
-export default CasesCLH;
+export default CasesToDeathPercent;

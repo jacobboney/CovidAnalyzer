@@ -1,8 +1,8 @@
 import React, {useState
 } from "react";
 import CasesMonthly from "../components/charts/cases/casesMonthly";
-import CasesCLH from "../components/charts/cases/casesCLH";
-import CasesRDTC from "../components/charts/cases/casesRDTC";
+import CasesVsHDI from "../components/charts/cases/casesVsHDI";
+import CasesToDeathPercent from "../components/charts/cases/casesToDeathPercent";
 import CasesCOD from "../components/charts/cases/casesCOD";
 import CasesBOS from "../components/charts/cases/casesBOS";
 
@@ -20,11 +20,11 @@ function Cases(){
                 break;
 
             case "hosp":
-                return <CasesCLH/>
+                return <CasesVsHDI/>
                 break;
 
             case "deathsOT":
-                return <CasesRDTC/>
+                return <CasesToDeathPercent/>
                 break;
 
             case "causes":
@@ -48,8 +48,8 @@ function Cases(){
             <div className="pageContent">
                 <div className="parametersContainer border-0">
                     <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Monthly Cases Over Time</p>
-                    <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>% of cases leading to hosp</p>
-                    <p className="parameterItem" id="deathsOT" type="button" class="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
+                    <p className="parameterItem" id="deathsOT" type="button" className="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
+                    <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>Cases Per Capita Vs HDI</p>
                     <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
                     <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
                 </div>

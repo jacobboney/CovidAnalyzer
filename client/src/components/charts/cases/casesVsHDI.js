@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Plot from "react-plotly.js";
 
 
-class CasesRDTC extends Component {
+class CasesVsHDI extends Component {
 
 
     constructor(props) {
@@ -12,7 +12,7 @@ class CasesRDTC extends Component {
     }
 
     componentDidMount() {
-        const endPoint = "/casesRDTC"
+        const endPoint = "/casesVsHDI"
 
         fetch(endPoint).then(
             response => response.json()
@@ -27,13 +27,17 @@ class CasesRDTC extends Component {
 
         let x = [];
         let y = [];
+        let z = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.HDI)
+            y.push(each.Country)
+            z.push(each.PerCapita)
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
+        plot_data['z'] = z;
+
 
         return plot_data;
     }
@@ -44,16 +48,21 @@ class CasesRDTC extends Component {
                 <Plot
                     data ={[
                         {
-                            type: 'bar',
+                            type: 'scatter3d',
+                            mode: "markers",
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            z: this.transformData(this.state.data)['z'],
+                            //line:{color: 'rgb(235,104,100)'}
+                            marker: {color: 'rgb(235,104,100)', size: 4}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Ratio of Deaths to Cases"}}
+                    layout = {{width: 1200, height: 750, title: "Number of Cases Per Capita Against HDI", scene:{xaxis:{title: "HDI"}, yaxis:{title: "Country"}, zaxis:{title: "Cases Per Capita"}}}}
+
                 />
             </div>
         )
     }
 }
 
-export default CasesRDTC;
+export default CasesVsHDI;
