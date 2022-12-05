@@ -6,7 +6,7 @@ import {LinkContainer} from "react-router-bootstrap"
 
 const Navigation = () =>{
         return(
-                <Navbar bg="primary" variant="dark" expand="lg">
+                <Navbar bg="primary" variant="dark" expand="lg" style={{marginBottom: "0"}}>
                     <div className="container">
                         <LinkContainer to="/">
                         <Navbar.Brand href="/">Covid Analyzer</Navbar.Brand>
