@@ -66,7 +66,7 @@ function Cases(){
                     labelledBy="Select"
                 />
             </div>
-            <div className="pageContent mt-0">
+            <div className="pageContent">
 
 
                 <div className="parametersContainer border-0">
@@ -74,7 +74,7 @@ function Cases(){
                     <p className="parameterItem" id="deathsOT" type="button" className="btn btn-primary" onClick={handleClick}>Percentage of Cases Resulting in Death</p>
                     <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>Cases Per Capita Vs HDI</p>
                     <p className="parameterItem" id="season" type="button" className="btn btn-primary" onClick={handleClick}>Total Cases Seasonally</p>
-                    <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
+
                 </div>
 
                 <div className="visContainer border-0">

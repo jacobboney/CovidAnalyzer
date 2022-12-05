@@ -71,10 +71,7 @@ function GlobalDistribution(){
             <div className="pageContent">
                 <div className="parametersContainer border-0">
                     <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Cases VS HDI VS Hand-Washing</p>
-                    <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>% of cases leading to hosp</p>
-                    <p className="parameterItem" id="deathsOT" type="button" class="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
-                    <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
-                    <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
+
                 </div>
 
                 <div className="visContainer border-0">

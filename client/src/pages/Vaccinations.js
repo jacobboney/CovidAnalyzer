@@ -75,8 +75,6 @@ function Vaccinations(){
                     <p className="parameterItem" id="casesOverTime" type="button" className="btn btn-primary" onClick={handleClick}>Monthly Vaccinations</p>
                     <p className="parameterItem" id="hosp" type="button" className="btn btn-primary" onClick={handleClick}>Vaccinations Per Capita</p>
                     <p className="parameterItem" id="deathsOT" type="button" class="btn btn-primary" onClick={handleClick}>Vaccinations Vs Cases</p>
-                    <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
-                    <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
                 </div>
 
                 <div className="visContainer border-0">
