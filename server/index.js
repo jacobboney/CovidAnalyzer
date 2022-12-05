@@ -28,13 +28,40 @@ app.get("/test", async (req, res) => {
 })
 
 ////APIs for Cases Page
-//Cases Over Time
-app.get("/casesCOT", async (req, res) => {
-    let sql = `select * from CONTINENT`;
+//Monthly Cases Over Time
+app.get("/casesMonthly", async (req, res) => {
+    let sql = `select * from(
+select "Monthly_Cases", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date" from(
+select sum(cases) as "Monthly_Cases", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year" from casedata
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY')
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))
+`;
     let data = await query(sql);
-    console.log(data);
+    //console.log(data);
     res.json(data);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Older APIs, not needed but kept for reference
+
 //Cases Leading to Hosp
 app.get("/casesCLH", async (req, res) => {
     let sql = `select * from CONTINENT`;
@@ -137,6 +164,7 @@ app.get("/globalBOS", async (req, res) => {
     console.log(data);
     res.json(data);
 })
+ */
 
 
 app.listen(PORT, () => {
