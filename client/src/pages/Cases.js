@@ -16,7 +16,7 @@ function Cases(){
         { label: "France 🇫🇷", value: "FRA" },
         { label: "Japan 🇯🇵", value: "JPN" },
         { label: "China 🇨🇳", value: "CHN" },
-        { label: "Iran 🇮🇷", value: "IRN" },
+        { label: "Iran 🇮🇷", value: "IRN" }
     ];
 
     function handleClick(e){
