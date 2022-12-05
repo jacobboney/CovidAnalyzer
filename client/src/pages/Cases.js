@@ -1,6 +1,6 @@
 import React, {useState
 } from "react";
-import CasesCOT from "../components/charts/cases/casesCOT";
+import CasesMonthly from "../components/charts/cases/casesMonthly";
 import CasesCLH from "../components/charts/cases/casesCLH";
 import CasesRDTC from "../components/charts/cases/casesRDTC";
 import CasesCOD from "../components/charts/cases/casesCOD";
@@ -16,7 +16,7 @@ function Cases(){
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return <CasesCOT/>
+                return <CasesMonthly/>
                 break;
 
             case "hosp":
@@ -36,9 +36,9 @@ function Cases(){
                 break;
 
             case "":
-                return <CasesCOT/>
+                return <CasesMonthly/>
             default:
-                return <CasesCOT/>
+                return <CasesMonthly/>
                 break;
             }
     }
@@ -47,11 +47,11 @@ function Cases(){
             <h1 className="text-center my-4">Cases</h1>
             <div className="pageContent">
                 <div className="parametersContainer">
-                    <p className="parameterItem" id="casesOverTime" onClick={handleClick}>% of cases over time</p>
-                    <p className="parameterItem" id="hosp" onClick={handleClick}>% of cases leading to hosp</p>
-                    <p className="parameterItem" id="deathsOT" onClick={handleClick}>ratio of deaths to cases over time</p>
-                    <p className="parameterItem" id="causes" onClick={handleClick}>leading causes of deaths(per age) over time</p>
-                    <p className="parameterItem" id="season" onClick={handleClick}># cases based on the season</p>
+                    <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Monthly Cases Over Time</p>
+                    <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>% of cases leading to hosp</p>
+                    <p className="parameterItem" id="deathsOT" type="button" class="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
+                    <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
+                    <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
                 </div>
 
                 <div className="visContainer">
