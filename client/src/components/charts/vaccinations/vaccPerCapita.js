@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Plot from "react-plotly.js";
 
 
-class VaccCLH extends Component {
+class VaccPerCapita extends Component {
 
 
     constructor(props) {
@@ -12,7 +12,7 @@ class VaccCLH extends Component {
     }
 
     componentDidMount() {
-        const endPoint = "/vaccCLH"
+        const endPoint = "/vaccPerCapita"
 
         fetch(endPoint).then(
             response => response.json()
@@ -28,8 +28,8 @@ class VaccCLH extends Component {
         let x = [];
         let y = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.COUNTRY)
+            y.push(each.PERCAPITA)
         })
 
         plot_data['x'] = x;
@@ -46,14 +46,15 @@ class VaccCLH extends Component {
                         {
                             type: 'bar',
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            marker:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Percentage of Cases Leading to Hospitalization"}}
+                    layout = {{width: 1200, height: 500, title: "Vaccinations Per Capita Globally", xaxis:{title: 'Country Codes'}, yaxis:{title: 'Vaccinations Per Capita'}}}
                 />
             </div>
         )
     }
 }
 
-export default VaccCLH;
+export default VaccPerCapita;
