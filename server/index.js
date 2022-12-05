@@ -42,7 +42,18 @@ order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))
     res.json(data);
 })
 
-
+app.get("/vaccPerCapita", async (req, res) => {
+    let sql = `select Country, round((totalvax / population), 5) as perCapita from(
+select daily_vax.iso_code as Country, sum(daily_vax.daily_vaccinations) as TotalVax, population.population as Population from daily_vax
+join population on daily_vax.iso_code=population.iso_code
+group by daily_vax.iso_code, population.population)
+where country != 'NAM'
+order by perCapita asc
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
 
 
 
