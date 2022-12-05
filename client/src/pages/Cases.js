@@ -54,8 +54,8 @@ function Cases(){
     }
     return(
         <div className="pageContainer">
-            <h1 className="text-center my-4">Cases</h1>
-            <div>
+            <h1 className="text-center mt-4">Cases</h1>
+            <div className="container-sm ">
                 <h3>Countries</h3>
                 {/* Remove below line to stop showing selected values */}
                 <pre>{JSON.stringify(selected)}</pre>
@@ -66,7 +66,7 @@ function Cases(){
                     labelledBy="Select"
                 />
             </div>
-            <div className="pageContent">
+            <div className="pageContent mt-0">
 
 
                 <div className="parametersContainer border-0">

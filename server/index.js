@@ -140,7 +140,21 @@ on t1."Date"=t2."Date")
 
 
 
-
+app.get("/globalCasesVsHDIvsHW", async (req, res) => {
+    let sql = `select "TotalCases", "HDI", "HWF" from(
+(select * from(
+(select sum(cases) as "TotalCases", iso_code as "Country" from casedata
+group by iso_code) 
+join (development_index)
+on "Country"=development_index.iso_code))
+join (select iso_code as "Code", handwashing_facilities as "HWF" from disease)
+on "Country"="Code")
+where "Country"!='IND' AND "Country"!='NAM'
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
 
 
 

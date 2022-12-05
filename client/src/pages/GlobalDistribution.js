@@ -1,6 +1,6 @@
 import React, {useState
 } from "react";
-import GlobalCOT from "../components/charts/global distributions/globalCOT";
+import GlobalCasesVsHDIvsHW from "../components/charts/global distributions/globalCasesVsHDIvsHW";
 import GlobalCLH from "../components/charts/global distributions/globalCLH";
 import GlobalRDTC from "../components/charts/global distributions/globalRDTC";
 import GlobalCOD from "../components/charts/global distributions/globalCOD";
@@ -17,7 +17,7 @@ function GlobalDistribution(){
     function showVis(){
         switch(selectedParam){
             case "casesOverTime":
-                return <GlobalCOT/>
+                return <GlobalCasesVsHDIvsHW/>
                 break;
 
             case "hosp":
@@ -37,9 +37,9 @@ function GlobalDistribution(){
                 break;
 
             case "":
-                return <GlobalCOT/>
+                return <GlobalCasesVsHDIvsHW/>
             default:
-                return <GlobalCOT/>
+                return <GlobalCasesVsHDIvsHW/>
                 break;
         }
     }
@@ -48,12 +48,12 @@ function GlobalDistribution(){
         <div className="pageContainer">
             <h1 className="text-center my-4">Global Distribution</h1>
             <div className="pageContent">
-                <div className="parametersContainer">
-                    <p className="parameterItem" id="casesOverTime" onClick={handleClick}>% of cases over time</p>
-                    <p className="parameterItem" id="hosp" onClick={handleClick}>% of cases leading to hosp</p>
-                    <p className="parameterItem" id="deathsOT" onClick={handleClick}>ratio of deaths to cases over time</p>
-                    <p className="parameterItem" id="causes" onClick={handleClick}>leading causes of deaths(per age) over time</p>
-                    <p className="parameterItem" id="season" onClick={handleClick}># cases based on the season</p>
+                <div className="parametersContainer border-0">
+                    <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Cases VS HDI VS Hand-Washing</p>
+                    <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>% of cases leading to hosp</p>
+                    <p className="parameterItem" id="deathsOT" type="button" class="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
+                    <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
+                    <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
                 </div>
 
                 <div className="visContainer">
