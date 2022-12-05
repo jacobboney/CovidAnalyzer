@@ -67,7 +67,7 @@ class VaccVsCases extends Component {
                             line:{color: 'rgb(0,104,100)'}
                         }
                     ]}
-                    layout = {{width: 1000, height: 600, title: `Number of Vaccinations Cases over Time in ${this.transformData(this.state.data)['q'][0]}`, xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Number of Cases (Monthly)'}}}
+                    layout = {{width: 1000, height: 600, title: `Number of Vaccinations VS Cases over Time in ${this.transformData(this.state.data)['q'][0]}`, xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Count (Monthly)'}}}
                 />
             </div>
         )
