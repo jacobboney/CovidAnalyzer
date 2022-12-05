@@ -3,16 +3,17 @@ import React, {Component} from "react";
 import Plot from "react-plotly.js";
 
 
-class CasesCOT extends Component {
+
+class CasesMonthly extends Component {
 
 
     constructor(props) {
         super(props);
-        this.state={data: []}
+        this.state={data: [], data2:[]}
     }
 
     componentDidMount() {
-        const endPoint = "/casesCOT"
+        const endPoint = "/casesMonthly"
 
         fetch(endPoint).then(
             response => response.json()
@@ -28,13 +29,16 @@ class CasesCOT extends Component {
         let x = [];
         let y = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.Date)
+            y.push(each.Monthly_Cases)
+
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
 
+        console.log(plot_data['x'])
+        console.log(plot_data['y'])
         return plot_data;
     }
 
@@ -44,16 +48,18 @@ class CasesCOT extends Component {
                 <Plot
                     data ={[
                         {
-                            type: 'bar',
+                            type: 'scatter',
+                            mode: "lines+markers",
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            line:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Number of Cases over Time"}}
+                    layout = {{width: 1000, height: 600, title: "Number of Monthly Cases over Time (USA)", xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Number of Cases (Monthly)'}}}
                 />
             </div>
         )
     }
 }
 
-export default CasesCOT;
+export default CasesMonthly;
