@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Plot from "react-plotly.js";
 
 
-class VaccCOT extends Component {
+class VaccMonthly extends Component {
 
 
     constructor(props) {
@@ -12,7 +12,7 @@ class VaccCOT extends Component {
     }
 
     componentDidMount() {
-        const endPoint = "/vaccCOT"
+        const endPoint = "/vaccMonthly"
 
         fetch(endPoint).then(
             response => response.json()
@@ -27,13 +27,17 @@ class VaccCOT extends Component {
 
         let x = [];
         let y = [];
+        let z = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.Date)
+            y.push(each.Monthly_Vacc)
+            z.push(each.Code)
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
+        plot_data['z'] = z;
+
 
         return plot_data;
     }
@@ -44,16 +48,18 @@ class VaccCOT extends Component {
                 <Plot
                     data ={[
                         {
-                            type: 'bar',
+                            type: 'scatter',
+                            mode: "lines+markers",
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            line:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Number of Cases over Time"}}
+                    layout = {{width: 1000, height: 600, title: `Number of Vaccinations Cases over Time in ${this.transformData(this.state.data)['z'][0]}`, xaxis: {type: 'date', title: 'Date (MMM-YYYY)'}, yaxis:{title: 'Number of Cases (Monthly)'}}}
                 />
             </div>
         )
     }
 }
 
-export default VaccCOT;
+export default VaccMonthly;

@@ -47,8 +47,8 @@ function Cases(){
             <h1 className="text-center my-4">Cases</h1>
             <div className="pageContent">
                 <div className="parametersContainer border-0">
-                    <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Monthly Cases Over Time</p>
-                    <p className="parameterItem" id="deathsOT" type="button" className="btn btn-primary" onClick={handleClick}>ratio of deaths to cases over time</p>
+                    <p className="parameterItem" id="casesOverTime" type="button" class="btn btn-primary" onClick={handleClick}>Monthly Cases</p>
+                    <p className="parameterItem" id="deathsOT" type="button" className="btn btn-primary" onClick={handleClick}>Percentage of Cases Resulting in Death</p>
                     <p className="parameterItem" id="hosp" type="button" class="btn btn-primary" onClick={handleClick}>Cases Per Capita Vs HDI</p>
                     <p className="parameterItem" id="causes" type="button" class="btn btn-primary" onClick={handleClick}>leading causes of deaths(per age) over time</p>
                     <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>

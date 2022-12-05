@@ -81,6 +81,21 @@ where "Country"!='NAM'
 
 
 
+app.get("/vaccMonthly", async (req, res) => {
+    let sql = `select * from(
+select "Monthly_Vacc", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(daily_vaccinations) as "Monthly_Vacc", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", daily_vax.iso_code as "Code" from daily_vax
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), daily_vax.iso_code
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
+
+
+
 
 app.get("/vaccPerCapita", async (req, res) => {
     let sql = `select Country, round((totalvax / population), 5) as perCapita from(
@@ -89,6 +104,32 @@ join population on daily_vax.iso_code=population.iso_code
 group by daily_vax.iso_code, population.population)
 where country != 'NAM'
 order by perCapita asc
+`;
+    let data = await query(sql);
+    //console.log(data);
+    res.json(data);
+})
+
+
+
+app.get("/vaccVsCases", async (req, res) => {
+    let sql = `select "Monthly_Cases" as "Cases", "Monthly_Vacc" as "Vacc", t1."Date", t1."Code" from(
+
+(select * from(
+select "Monthly_Cases", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(cases) as "Monthly_Cases", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", casedata.iso_code as "Code" from casedata
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), casedata.iso_code
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))) t1
+
+inner join (select * from(
+select "Monthly_Vacc", to_date(to_char("Year") || to_char("Month") || '01', 'yyyy/mm/dd') as "Date", "Code" from(
+select sum(daily_vaccinations) as "Monthly_Vacc", to_char(true_date, 'MM') as "Month", to_char(true_date, 'YYYY') as "Year", daily_vax.iso_code as "Code" from daily_vax
+where iso_code = 'USA'
+group by to_char(true_date, 'MM'), to_char(true_date, 'YYYY'), daily_vax.iso_code
+order by to_char(true_date, 'YYYY'), to_char(true_date, 'MM') asc))) t2
+
+on t1."Date"=t2."Date")
 `;
     let data = await query(sql);
     //console.log(data);

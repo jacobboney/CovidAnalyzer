@@ -50,7 +50,7 @@ class VaccPerCapita extends Component {
                             marker:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 1200, height: 500, title: "Vaccinations Per Capita Globally", xaxis:{title: 'Country Codes'}, yaxis:{title: 'Vaccinations Per Capita'}}}
+                    layout = {{width: 1200, height: 700, title: "Vaccinations Per Capita Globally", xaxis:{title: 'Country Codes'}, yaxis:{title: 'Vaccinations Per Capita'}}}
                 />
             </div>
         )
