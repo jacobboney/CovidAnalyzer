@@ -77,7 +77,7 @@ function GlobalDistribution(){
                     <p className="parameterItem" id="season" type="button" class="btn btn-primary" onClick={handleClick}># cases based on the season</p>
                 </div>
 
-                <div className="visContainer">
+                <div className="visContainer border-0">
                 {selectedParam && (
                         <div className="d-flex justify-content-center w-100">
                             {showVis()}

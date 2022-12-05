@@ -27,13 +27,16 @@ class CasesBOS extends Component {
 
         let x = [];
         let y = [];
+        let z = [];
         data.map(each => {
-            x.push(each.NAME)
-            y.push(each.AREA)
+            x.push(each.SEASON)
+            y.push(each.TotalCases)
+            z.push(each.Country)
         })
 
         plot_data['x'] = x;
         plot_data['y'] = y;
+        plot_data['z'] = z;
 
         return plot_data;
     }
@@ -46,10 +49,11 @@ class CasesBOS extends Component {
                         {
                             type: 'bar',
                             x: this.transformData(this.state.data)['x'],
-                            y: this.transformData(this.state.data)['y']
+                            y: this.transformData(this.state.data)['y'],
+                            marker:{color: 'rgb(235,104,100)'}
                         }
                     ]}
-                    layout = {{width: 500, height: 500, title: "Cases Based on the Season"}}
+                    layout = {{width: 1200, height: 700, title: `Total Cases Seasonally in ${this.transformData(this.state.data)['z'][0]}`, xaxis:{title: 'Country Codes'}, yaxis:{title: 'Vaccinations Per Capita'}}}
                 />
             </div>
         )
